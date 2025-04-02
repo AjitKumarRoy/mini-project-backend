@@ -52,10 +52,10 @@ exports.googleCallback = async (req, res, next) => {
         };
         const jwtToken = generateToken(payload);
         res.cookie('token', jwtToken, {
-            httpOnly: true,
+            // httpOnly: true,
             secure: true,
             sameSite: 'None',
-            domain: 'mini-project-frontend-omega.vercel.app',
+            domain: '.vercel.app',
             path: '/',
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
