@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 
 const corsOptions = {
-    origin:  ['https://www.ajitkumarroy.me/', 'https://ajitkumarroy.me', 'https://mini-project-frontend-omega.vercel.app'],//  Replace with your frontend's origin
+    origin:  ['https://www.ajitkumarroy.me', 'https://ajitkumarroy.me', 'https://mini-project-frontend-omega.vercel.app'],//  Replace with your frontend's origin
     credentials: true, //  Allow cookies to be sent
     allowedHeaders: ["Content-Type", "Authorization"],  //
     methods: ["GET", "POST", "PUT", "DELETE"],
