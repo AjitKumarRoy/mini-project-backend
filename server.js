@@ -12,6 +12,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
+
+// Connect to MongoDB
+connectDB();
+
+
 const corsOptions = {
     origin:  ['https://www.ajitkumarroy.me', 'https://ajitkumarroy.me', 'https://mini-project-frontend-omega.vercel.app'],//  Replace with your frontend's origin
     credentials: true, //  Allow cookies to be sent
@@ -19,8 +24,16 @@ const corsOptions = {
     methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
-// Connect to MongoDB
-connectDB();
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*'); 
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
+    next();
+});
+
 
 
 // Middlewares
