@@ -51,6 +51,7 @@ exports.googleCallback = async (req, res, next) => {
             email: user.email
         };
         const jwtToken = generateToken(payload);
+        localStorage.setItem("token", token);
         res.cookie('token', jwtToken, {
             // httpOnly: true,
             secure: true,
