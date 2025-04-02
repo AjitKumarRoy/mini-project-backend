@@ -53,8 +53,8 @@ exports.googleCallback = async (req, res, next) => {
         const jwtToken = generateToken(payload);
         res.cookie('token', jwtToken, {
             httpOnly: true,
-            sameSite: 'None', 
-            secure: true
+            secure: true,
+            sameSite: 'None'
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
         //res.redirect(`http://localhost:3001/profile?token=${jwtToken}`);
