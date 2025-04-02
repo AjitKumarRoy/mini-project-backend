@@ -13,8 +13,9 @@ const PORT = process.env.PORT || 3000;
 
 
 const corsOptions = {
-    origin: ['http://localhost:5173', 'https://mini-project-frontend-omega.vercel.app/'], //  Replace with your frontend's origin
+    origin:  'https://mini-project-frontend-omega.vercel.app', //  Replace with your frontend's origin
     credentials: true, //  Allow cookies to be sent
+    methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
 // Connect to MongoDB
