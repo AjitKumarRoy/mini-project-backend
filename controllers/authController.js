@@ -52,15 +52,15 @@ exports.googleCallback = async (req, res, next) => {
         };
         const jwtToken = generateToken(payload);
         res.cookie('token', jwtToken, {
-            // httpOnly: true,
+            httpOnly: true,
             secure: true,
             sameSite: 'None',
-            domain: '.vercel.app',
             path: '/',
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
         //res.redirect(`http://localhost:3001/profile?token=${jwtToken}`);
-        res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/`)
+        // res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/`)
+        res.redirect(`https://mini-project-frontend-omega.vercel.app/`)
     } catch(error) {
         next(error);
     }
