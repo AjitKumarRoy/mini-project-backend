@@ -18,11 +18,21 @@ connectDB();
 
 
 const corsOptions = {
-    origin:  ['https://www.ajitkumarroy.me', 'https://ajitkumarroy.me', 'https://mini-project-frontend-omega.vercel.app'],//  Replace with your frontend's origin
+    origin:  ['https://www.ajitkumarroy.me', 'https://ajitkumarroy.me', 'https://mini-project-frontend-omega.vercel.app', 'https://mini-project-frontend-ajits-projects-7d941631.vercel.app', 'https://mini-project-frontend-git-master-ajits-projects-7d941631.vercel.app'],//  Replace with your frontend's origin
     credentials: true, //  Allow cookies to be sent
     allowedHeaders: ["Content-Type", "Authorization"],  //
     methods: ["GET", "POST", "PUT", "DELETE"],
 };
+
+
+
+
+// Middlewares
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+app.use(cookieParser());
 
 
 app.use((req, res, next) => {
@@ -34,14 +44,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
-// Middlewares
-// app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
-app.use(cookieParser());
 
 // Routes
 app.get('/', (req, res) => {
