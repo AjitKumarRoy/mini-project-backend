@@ -54,7 +54,8 @@ exports.googleCallback = async (req, res, next) => {
         res.cookie('token', jwtToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'Lax',
+            sameSite: 'None',
+            domain: 'mini-project-frontend-omega.vercel.app',
             path: '/',
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
