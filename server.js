@@ -9,7 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 const sheetRoutes = require('./routes/sheetRoutes');
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 
 const corsOptions = {
