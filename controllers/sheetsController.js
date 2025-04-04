@@ -517,10 +517,13 @@ const appendData = async (req, res, next) => {
                             },
                             cell: {
                                 userEnteredFormat: {
-                                    horizontalAlignment: 'CENTER'
+                                    horizontalAlignment: 'CENTER',
+                                    textFormat: {
+                                        bold: false // Explicitly set bold to false
+                                    }
                                 }
                             },
-                            fields: 'userEnteredFormat.horizontalAlignment'
+                            fields: 'userEnteredFormat.horizontalAlignment, userEnteredFormat.textFormat.bold'
                         }
                     }
                 ]
