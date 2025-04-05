@@ -18,14 +18,25 @@ const PORT = process.env.PORT || 3000;
 // Connect to MongoDB
 connectDB();
 
-
-const corsOptions = {
-    origin:  ['https://www.ajitkumarroy.me', 'https://ajitkumarroy.me', 'https://mini-project-frontend-omega.vercel.app', 'https://mini-project-frontend-ajits-projects-7d941631.vercel.app', 'https://mini-project-frontend-git-master-ajits-projects-7d941631.vercel.app'],//  Replace with your frontend's origin
-    credentials: true, //  Allow cookies to be sent
-    allowedHeaders: ["Content-Type", "Authorization"],  //
-    methods: ["GET", "POST", "PUT", "DELETE"],
-};
-
+// Cors setup
+const allowedOrigins = [
+    'https://www.ajitkumarroy.me',
+    'https://ajitkumarroy.me',
+    'https://mini-project-frontend-omega.vercel.app',
+    'https://mini-project-frontend-ajits-projects-7d941631.vercel.app',
+    'https://mini-project-frontend-git-master-ajits-projects-7d941631.vercel.app',
+  ];
+  
+  const corsOptions = {
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  };
 
 
 
@@ -37,14 +48,14 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*'); 
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    if (req.method === 'OPTIONS') return res.sendStatus(200);
-    next();
-});
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*'); 
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//     res.setHeader('Access-Control-Allow-Credentials', 'true');
+//     if (req.method === 'OPTIONS') return res.sendStatus(200);
+//     next();
+// });
 
 
 // Routes
