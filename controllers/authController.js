@@ -91,7 +91,12 @@ exports.refreshToken = async (req, res, next) => {
 };
 
 exports.logout = (req, res) => {
-    res.clearCookie('token');
+    res.clearCookie('token', {
+        path: '/', // Match the original cookie path
+        httpOnly: true,
+        sameSite: 'None',
+        secure: true,
+      });
     res.json({ 'message': 'Logged out sucessfully' });
 };
 
