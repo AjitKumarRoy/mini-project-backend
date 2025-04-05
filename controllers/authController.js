@@ -57,7 +57,7 @@ exports.googleCallback = async (req, res, next) => {
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
         //res.redirect(`http://localhost:3001/profile?token=${jwtToken}`);
-        res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/`)
+        res.redirect(`${process.env.FRONTEND_URL}/`)
     } catch(error) {
         next(error);
     }
