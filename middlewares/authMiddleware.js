@@ -7,7 +7,7 @@ const authMiddleware = (req, res, next) => {
     console.log('Token from header:', tokenFromHeader);
 
     const token = tokenFromCookie || tokenFromHeader;
-    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+    // const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
     if (!token) {
         return res.status(401).json({ 'message': 'Access denied. No token provided.' });
     }
