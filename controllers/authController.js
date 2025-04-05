@@ -18,7 +18,7 @@ exports.googleCallback = async (req, res, next) => {
         const code = req.query.code;
         const { tokens } = await oauth2Client.getToken(code);
         oauth2Client.setCredentials(tokens);
-        
+
         // Get user profile info
         const oauth2 = google.oauth2({ version: 'v2', auth: oauth2Client });
         const { data } = await oauth2.userinfo.get();
@@ -55,11 +55,13 @@ exports.googleCallback = async (req, res, next) => {
             httpOnly: true,
             sameSite: 'None', // Allow frontend and backend on different ports
             secure: true,
+            domain: '.ajitkumarroy.me', // Set the domain to include your frontend
+            path: '/',
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
         //res.redirect(`http://localhost:3001/profile?token=${jwtToken}`);
         res.redirect(`${process.env.FRONTEND_URL}/`)
-    } catch(error) {
+    } catch (error) {
         next(error);
     }
 };
@@ -68,30 +70,30 @@ exports.refreshToken = async (req, res, next) => {
     try {
         const { refreshToken } = req.body;
         if (!refreshToken) {
-            return res.status(400).json({'message ' : 'Refresh token missing.'});
+            return res.status(400).json({ 'message ': 'Refresh token missing.' });
         }
-        oauth2Client.setCredentials({refresh_token: refreshToken});
+        oauth2Client.setCredentials({ refresh_token: refreshToken });
         const { credentials } = await oauth2Client.refreshAccessToken();
 
         // Update the access token and expiration time in DB
         // find the user by refresh token
-        const user = await User.findOne({refreshToken});
+        const user = await User.findOne({ refreshToken });
         if (user) {
             user.accessToken = credentials.access_token,
-            user.tokenExpiry = credentials.expiry_date
+                user.tokenExpiry = credentials.expiry_date
         }
         res.json({
             accessToken: credentials.access_token,
             expiryDate: credentials.expiry_date
         });
-    } catch(error) {
+    } catch (error) {
         next(error);
     }
 };
 
 exports.logout = (req, res) => {
     res.clearCookie('token');
-    res.json({'message': 'Logged out sucessfully'});
+    res.json({ 'message': 'Logged out sucessfully' });
 };
 
 exports.getProfile = async (req, res, next) => {
@@ -109,7 +111,7 @@ exports.getProfile = async (req, res, next) => {
             email: user.email,
             profilePicture: user.picture, // Assuming user has a `profilePicture` field
         });
-    } catch(error) {
+    } catch (error) {
         next(error);
     }
 };
