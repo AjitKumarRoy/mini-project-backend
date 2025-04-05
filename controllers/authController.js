@@ -54,6 +54,7 @@ exports.googleCallback = async (req, res, next) => {
         res.cookie('token', jwtToken, {
             httpOnly: true,
             sameSite: 'None', // Allow frontend and backend on different ports
+            secure: true,
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
         //res.redirect(`http://localhost:3001/profile?token=${jwtToken}`);
