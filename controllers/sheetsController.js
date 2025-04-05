@@ -700,7 +700,7 @@ const listSheetsWithMetadata = async (req, res, next) => {
 
 // List all spreadsheets
 const listAllSpreadsheets = async (req, res, next) => {
-    console.log('Route hit hello');
+    // console.log('Route hit hello');
     try {
         await setUserCredentials(req.user.id);
         

@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const sheetRoutes = require('./routes/sheetRoutes');
+const viewsRoutes = require('./routes/viewsRoutes');
+const trackIPViews = require('./middlewares/trackIPViews');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -46,11 +48,12 @@ app.use((req, res, next) => {
 
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/', trackIPViews, (req, res) => {
     res.send('hello world!');
 });
 app.use('/api/auth', authRoutes);
 app.use('/api/sheets', sheetRoutes);
+app.use('/api', viewsRoutes);
 
 // Basic error handler
 app.use((err, req, res, next) => {
