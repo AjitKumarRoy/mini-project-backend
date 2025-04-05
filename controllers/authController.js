@@ -55,7 +55,6 @@ exports.googleCallback = async (req, res, next) => {
             httpOnly: true,
             sameSite: 'None', // Allow frontend and backend on different ports
             secure: true,
-            domain: '.ajitkumarroy.me', // Set the domain to include your frontend
             path: '/',
         });
         //res.redirect('/api/auth/profile');  // or send a JSON response if usring SPA     
