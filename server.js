@@ -13,6 +13,8 @@ const trackIPViews = require('./middlewares/trackIPViews');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.set('trust proxy', true);
+
 
 
 // Connect to MongoDB
@@ -25,6 +27,7 @@ const allowedOrigins = [
     'https://mini-project-frontend-omega.vercel.app',
     'https://mini-project-frontend-ajits-projects-7d941631.vercel.app',
     'https://mini-project-frontend-git-master-ajits-projects-7d941631.vercel.app',
+    process.env.FRONTEND_URL
   ];
   
   const corsOptions = {
