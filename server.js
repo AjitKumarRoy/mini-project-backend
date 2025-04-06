@@ -9,6 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 const sheetRoutes = require('./routes/sheetRoutes');
 const viewsRoutes = require('./routes/viewsRoutes');
 const trackIPViews = require('./middlewares/trackIPViews');
+const rateLimiter = require('./middlewares/rateLimiter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(rateLimiter);
 
 
 // app.use((req, res, next) => {
