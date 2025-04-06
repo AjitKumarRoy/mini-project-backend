@@ -69,11 +69,24 @@ router.post('/contact', [
 
         //  Send Confirmation Email to User
         await transporter.sendMail({
-            from: process.env.GMAIL_USER,
+            from: `"Easy Sheets Support" <${process.env.GMAIL_USER}>`,
             to: email,
-            subject: 'We Received Your Message!',
-            html: `<p>Hi ${name},</p><p>Thanks for reaching out! We'll get back to you shortly.</p>`
+            subject: 'Thanks for Contacting Easy Sheets!',
+            text: `Hi ${name},\n\nThank you for reaching out to us. We have received your message and will get back to you shortly.\n\nRegards,\nEasy Sheets Team\nhttps://www.ajitkumarroy.me`,
+            html: `
+                <p>Hi ${name},</p>
+                <p>Thank you for reaching out to <strong>Easy Sheets</strong>.</p>
+                <p>We have received your message and will get back to you shortly.</p>
+                <br>
+                <hr>
+                <p style="font-size: 12px; color: #666;">
+                  You are receiving this email because you contacted us via our website.<br>
+                  Visit us at <a href="https://www.ajitkumarroy.me">www.ajitkumarroy.me</a><br>
+                  Contact: ${process.env.GMAIL_USER}
+                </p>
+            `
         });
+        
 
         res.status(200).json({ message: 'Thank you for you message! We have received it and will get back to you soon.' });
     } catch (error) {
